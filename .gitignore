@@ -147,6 +147,9 @@ stats-*.json
 # Composer
 composer.phar
 vendor
+!vendor/linux
+!vendor/macos
+!vendor/win
 !composer.lock
 
 # Applcation

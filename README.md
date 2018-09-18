@@ -2,7 +2,6 @@
 
 [![NPM version](https://img.shields.io/npm/v/mozjpeg-binaries.svg)](https://www.npmjs.org/package/mozjpeg-binaries)
 [![Travis Build Status](https://img.shields.io/travis/itgalaxy/mozjpeg-binaries/master.svg?label=build)](https://travis-ci.org/itgalaxy/mozjpeg-binaries)
-[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/ncimwsxt8hqahl51?svg=true)](https://ci.appveyor.com/project/evilebottnawi/mozjpeg-binaries)
 [![dependencies Status](https://david-dm.org/itgalaxy/mozjpeg-binaries/status.svg)](https://david-dm.org/itgalaxy/mozjpeg-binaries)
 [![devDependencies Status](https://david-dm.org/itgalaxy/mozjpeg-binaries/dev-status.svg)](https://david-dm.org/itgalaxy/mozjpeg-binaries?type=dev)
 

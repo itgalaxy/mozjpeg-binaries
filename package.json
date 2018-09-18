@@ -71,7 +71,7 @@
   "scripts": {
     "postinstall": "node src/install.js",
     "precommit": "lint-staged",
-    "lint:prettify": "prettier --list-different '{lib,__tests__}/**/*.{js,mjs,jsx,md,yml}' '*.{js,mjs,jsx,md,yml}'",
+    "lint:prettify": "prettier --list-different '{bin,src,__tests__}/**/*.{js,mjs,jsx,md,yml}' '*.{js,mjs,jsx,md,yml}'",
     "lint:md": "remark . -i .gitignore -f -q",
     "lint:js": "eslint . --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' --report-unused-disable-directives --ignore-pattern '!.*' --ignore-path .gitignore --ext '.js,.mjs,.jsx'",
     "lint": "npm-run-all -l -p 'lint:**'",
