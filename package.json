@@ -1,0 +1,108 @@
+{
+  "name": "mozjpeg-binaries",
+  "version": "1.0.0",
+  "description": "Wrapper for mozjpeg binaries (cjpeg, djpeg, jpegtran, rdjpgcom, tjbench and wrjpgcom).",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itgalaxy/mozjpeg-binaries.git"
+  },
+  "homepage": "https://github.com/itgalaxy/mozjpeg-binaries",
+  "keywords": [
+    "jpeg",
+    "jpg",
+    "img",
+    "image",
+    "compress",
+    "minify",
+    "mozjpeg",
+    "optimize",
+    "imagemin"
+  ],
+  "author": "Itgalaxy",
+  "license": "MIT",
+  "main": "src/index.js",
+  "bugs": {
+    "url": "https://github.com/itgalaxy/mozjpeg-binaries/issues"
+  },
+  "bin": {
+    "cjpeg": "bin/cjpeg.js",
+    "djpeg": "bin/djpeg.js",
+    "jpegtran": "bin/jpegtran.js",
+    "rdjpgcom": "bin/rdjpgcom.js",
+    "tjbench": "bin/tjbench.js",
+    "wrjpgcom": "bin/wrjpgcom.js"
+  },
+  "files": [
+    "src",
+    "bin"
+  ],
+  "dependencies": {
+    "bin-build": "^3.0.0",
+    "bin-wrapper": "^4.0.0"
+  },
+  "devDependencies": {
+    "compare-size": "3.0.0",
+    "babel-eslint": "^9.0.0",
+    "bin-check": "^4.1.0",
+    "eslint": "^5.2.0",
+    "eslint-plugin-ava": "^5.0.0",
+    "eslint-plugin-html": "^4.0.5",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-itgalaxy": "^79.0.0",
+    "eslint-plugin-jest": "^21.20.2",
+    "eslint-plugin-jsx-a11y": "^6.0.0",
+    "eslint-plugin-lodash": "^2.4.3",
+    "eslint-plugin-markdown": "^1.0.0-beta.8",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-unicorn": "^6.0.0",
+    "execa": "^1.0.0",
+    "husky": "^0.14.0",
+    "jest": "23.6.0",
+    "lint-staged": "^7.0.0",
+    "npm-run-all": "^4.0.0",
+    "npmpub": "^4.0.1",
+    "prettier": "^1.5.2",
+    "remark-cli": "^5.0.0",
+    "remark-preset-lint-itgalaxy": "^13.0.0",
+    "tempy": "^0.2.1"
+  },
+  "scripts": {
+    "postinstall": "node src/install.js",
+    "precommit": "lint-staged",
+    "lint:prettify": "prettier --list-different '{lib,__tests__}/**/*.{js,mjs,jsx,md,yml}' '*.{js,mjs,jsx,md,yml}'",
+    "lint:md": "remark . -i .gitignore -f -q",
+    "lint:js": "eslint . --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' --report-unused-disable-directives --ignore-pattern '!.*' --ignore-path .gitignore --ext '.js,.mjs,.jsx'",
+    "lint": "npm-run-all -l -p 'lint:**'",
+    "prettify": "npm run lint:prettify -- --write",
+    "fix:js": "npm run lint:js -- --fix",
+    "fix": "npm-run-all -l prettify -p 'fix:**'",
+    "pretest": "npm run lint",
+    "test-only": "jest",
+    "test": "npm run test-only -- --coverage",
+    "release": "npmpub"
+  },
+  "remarkConfig": {
+    "plugins": [
+      "remark-preset-lint-itgalaxy"
+    ]
+  },
+  "eslintConfig": {
+    "rules": {
+      "node/no-unpublished-require": "off"
+    },
+    "parserOptions": {
+      "sourceType": "script"
+    },
+    "extends": [
+      "plugin:itgalaxy/jest",
+      "plugin:itgalaxy/esnext",
+      "plugin:itgalaxy/node"
+    ],
+    "root": true
+  },
+  "engines": {
+    "node": ">= 6.9.0 || >= 8.9.0"
+  }
+}
