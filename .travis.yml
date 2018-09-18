@@ -1,0 +1,59 @@
+sudo: false
+
+git:
+  depth: 10
+
+branches:
+  only:
+    - master
+    - /^greenkeeper/.*$/
+
+language: node_js
+
+cache:
+  directories:
+    - $HOME/.npm
+    - node_modules
+
+addons:
+  apt:
+    packages: nasm
+
+matrix:
+  fast_finish: true
+  include:
+    - os: linux
+      node_js: "10"
+      script: npm run $JOB_PART
+      env: JOB_PART=pretest
+    - os: linux
+      node_js: "10"
+      script: npm run $JOB_PART
+      env: JOB_PART=test-only
+    - os: osx
+      node_js: "10"
+      script: npm run $JOB_PART
+      env: JOB_PART=test-only
+    - os: linux
+      node_js: "8"
+      script: npm run $JOB_PART
+      env: JOB_PART=test-only
+    - os: osx
+      node_js: "8"
+      script: npm run $JOB_PART
+      env: JOB_PART=test-only
+    - os: linux
+      node_js: "6"
+      script: npm run $JOB_PART
+      env: JOB_PART=test-only
+    - os: osx
+      node_js: "6"
+      script: npm run $JOB_PART
+      env: JOB_PART=test-only
+
+before_install:
+  - "if [[ $TRAVIS_OS_NAME == osx ]]; then brew update && brew install nasm; fi;"
+  - "if [[ `npm -v` != 6* ]]; then npm i -g npm@latest; fi"
+  - nvm --version
+  - node --version
+  - npm --version
