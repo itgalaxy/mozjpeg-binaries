@@ -1,6 +1,6 @@
 {
   "name": "mozjpeg-binaries",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Wrapper for mozjpeg binaries (cjpeg, djpeg, jpegtran, rdjpgcom, tjbench and wrjpgcom).",
   "repository": {
     "type": "git",
