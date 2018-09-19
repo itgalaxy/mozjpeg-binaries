@@ -1,12 +1,12 @@
 "use strict";
 
-const binaries = require("./bin-wrapper");
+const binWrappers = require("./bin-wrappers");
 
 module.exports = {
-  cjpeg: binaries.cjpeg.path(),
-  djpeg: binaries.djpeg.path(),
-  jpegtran: binaries.jpegtran.path(),
-  rdjpgcom: binaries.rdjpgcom.path(),
-  tjbench: binaries.tjbench.path(),
-  wrjpgcom: binaries.wrjpgcom.path()
+  cjpeg: binWrappers.cjpeg.path(),
+  djpeg: binWrappers.djpeg.path(),
+  jpegtran: binWrappers.jpegtran.path(),
+  rdjpgcom: binWrappers.rdjpgcom.path(),
+  tjbench: binWrappers.tjbench.path(),
+  wrjpgcom: binWrappers.wrjpgcom.path()
 };

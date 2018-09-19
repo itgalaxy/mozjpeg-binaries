@@ -4,7 +4,7 @@ const fs = require("fs");
 const os = require("os");
 const binBuild = require("bin-build");
 const PQueue = require("p-queue");
-const binWrappers = require("./bin-wrapper");
+const binWrappers = require("./bin-wrappers");
 
 const buildCommands = () => {
   const cpus = (os.cpus() || { length: 1 }).length;
