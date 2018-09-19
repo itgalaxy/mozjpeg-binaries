@@ -37,6 +37,7 @@
     "bin"
   ],
   "dependencies": {
+    "p-queue": "^3.0.0",
     "bin-build": "^3.0.0",
     "bin-wrapper": "^4.0.0"
   },
