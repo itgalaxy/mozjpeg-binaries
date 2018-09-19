@@ -17,7 +17,7 @@ module.exports = {
     .src(`${url}linux/libjpeg.a`, "linux")
     .src(`${url}linux/libjpeg.la`, "linux")
     .src(`${url}linux/libturbojpeg.a`, "linux")
-    .src(`${url}linux/libturboj1peg.la`, "linux")
+    .src(`${url}linux/libturbojpeg.la`, "linux")
     .dest(dest)
     .use(isWin ? "cjpeg.exe" : "cjpeg"),
 
