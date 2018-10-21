@@ -65,7 +65,7 @@
     "npm-run-all": "^4.0.0",
     "npmpub": "^4.0.1",
     "prettier": "^1.5.2",
-    "remark-cli": "^5.0.0",
+    "remark-cli": "^6.0.0",
     "remark-preset-lint-itgalaxy": "^13.0.0",
     "tempy": "^0.2.1"
   },
