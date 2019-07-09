@@ -3,7 +3,7 @@
 const fs = require("fs");
 const os = require("os");
 const binBuild = require("bin-build");
-const PQueue = require("p-queue");
+const { default: PQueue } = require("p-queue");
 const binWrappers = require("./bin-wrappers");
 
 const buildCommands = () => {
@@ -41,8 +41,8 @@ Object.keys(binWrappers).forEach(program => {
       .then(() => {
         const commandWihtoutCheck = [
           "rdjpgcom",
-          "wrjpgcom",
-          "tjbench"
+          "tjbench",
+          "wrjpgcom"
         ].includes(program);
         const checkCommand = commandWihtoutCheck ? ["-help"] : ["-version"];
 
@@ -84,7 +84,7 @@ Object.keys(binWrappers).forEach(program => {
             const exitCode =
               typeof buildError.code === "number" ? buildError.code : 1;
 
-            process.exit(exitCode); // eslint-disable-line no-process-exit
+            process.exit(exitCode);
           });
 
         queue.clear();
