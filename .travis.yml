@@ -22,40 +22,41 @@ addons:
 matrix:
   fast_finish: true
   include:
-    #- os: linux
-    #  node_js: "12"
-    #  script: npm run $JOB_PART
-    #  env: JOB_PART=pretest
-    #- os: linux
-    #  node_js: "12"
-    #  script: npm run $JOB_PART
-    #  env: JOB_PART=test:only
-    #- os: osx
-    #  node_js: "12"
-    #  script: npm run $JOB_PART
-    #  env: JOB_PART=test:only
-    # - os: windows
-    #   node_js: "12"
-    #   script: npm run $JOB_PART
-    #   env: JOB_PART=test:only
-    #- os: linux
-    #  node_js: "10"
-    #  script: npm run $JOB_PART
-    #  env: JOB_PART=test:only
-    #- os: osx
-    #  node_js: "10"
-    #  script: npm run $JOB_PART
-    #  env: JOB_PART=test:only
-    # - os: windows
-    #   node_js: "10"
-    #   script: npm run $JOB_PART
-    #   env: JOB_PART=test:only
-
     - os: linux
-      node_js: "8"
+      node_js: "12"
+      script: npm run $JOB_PART
+      env: JOB_PART=pretest
+    - os: linux
+      node_js: "12"
       script: npm run $JOB_PART
       env: JOB_PART=test:only
     - os: osx
+      node_js: "12"
+      script: npm run $JOB_PART
+      env: JOB_PART=test:only
+    - os: windows
+      node_js: "12"
+      script: npm run $JOB_PART
+      env: JOB_PART=test:only
+    - os: linux
+      node_js: "10"
+      script: npm run $JOB_PART
+      env: JOB_PART=test:only
+    - os: osx
+      node_js: "10"
+      script: npm run $JOB_PART
+      env: JOB_PART=test:only
+    - os: windows
+      node_js: "10"
+      script: npm run $JOB_PART
+      env: JOB_PART=test:only
+    - stage: test
+      os: linux
+      node_js: "8"
+      script: npm run $JOB_PART
+      env: JOB_PART=test:only
+    - stage: test
+      os: osx
       node_js: "8"
       script: npm run $JOB_PART
       env: JOB_PART=test:only
@@ -63,10 +64,48 @@ matrix:
       node_js: "8"
       script: npm run $JOB_PART
       env: JOB_PART=test:only
+    - stage: deploy
+      os: linux
+      node_js: "8"
+      script:
+        - node -p "process.arch"
+        - node src/install.js
+        - tar -czvf mozjpeg-linux.tar.gz $COMPILATION_DEST
+        - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+        - bash upload.sh mozjpeg-linux.tar.gz
+      env:
+        - COMPILATION_DEST=binaries/linux
+        - COMPILATION_REQUIRED=true
+    - stage: deploy
+      os: osx
+      node_js: "8"
+      script:
+        - node -p "process.arch"
+        - node src/install.js
+        - tar -czvf mozjpeg-osx.tar.gz $COMPILATION_DEST
+        - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+        - bash upload.sh mozjpeg-osx.tar.gz
+      env:
+        - COMPILATION_DEST=binaries/macos
+        - COMPILATION_REQUIRED=true
+    # TODO implement in next release
+    # - stage: deploy
+    #  os: windows
+    #  node_js: "8"
+    #  script:
+    #    - node -p "process.arch"
+    #    - choco install vcredist140
+    #    - node src/install.js
+    #    - tar -czvf mozjpeg-windows.tar.gz $COMPILATION_DEST
+    #    - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+    #    - bash upload.sh mozjpeg-windows.tar.gz
+    #  env:
+    #    - COMPILATION_DEST=binaries/windows
+    #    - COMPILATION_REQUIRED=true
 
 before_install:
-  - if [[ $TRAVIS_OS_NAME == osx ]]; then brew update && brew install nasm; fi;
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm install -g npm@latest; fi
+  - if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew update && brew install nasm; fi;
+  - if [[ ("$TRAVIS_OS_NAME" == "linux") || ($TRAVIS_OS_NAME == "osx") ]]; then npm install -g npm@latest; fi
   - node --version
   - npm --version
 
