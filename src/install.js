@@ -46,6 +46,9 @@ Object.keys(binWrappers).forEach(program => {
         ].includes(program);
         const checkCommand = commandWihtoutCheck ? ["-help"] : ["-version"];
 
+        // eslint-disable-next-line no-console
+        console.log(binWrapper.path());
+
         return binWrapper
           .runCheck(checkCommand)
           .then(binCheck => {
@@ -55,6 +58,9 @@ Object.keys(binWrappers).forEach(program => {
           })
           .catch(error => {
             const { message } = error;
+
+            // eslint-disable-next-line no-console
+            console.log(error);
 
             if (commandWihtoutCheck && /usage/iu.test(message)) {
               console.log(`${program} pre-build test passed successfully`); // eslint-disable-line no-console
