@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## 2.0.0-rc.3 - 2019-07-10
+
+- fix: binaries
+
 ## 2.0.0-rc.2 - 2019-07-09
 
 - fix: binaries

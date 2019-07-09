@@ -1,6 +1,6 @@
 {
   "name": "mozjpeg-binaries",
-  "version": "2.0.0-rc.2",
+  "version": "2.0.0-rc.3",
   "description": "Wrapper for mozjpeg binaries (cjpeg, djpeg, jpegtran, rdjpgcom, tjbench and wrjpgcom).",
   "repository": {
     "type": "git",
@@ -71,7 +71,7 @@
   "scripts": {
     "postinstall": "node src/install.js",
     "lint:prettier": "prettier --list-different '{bin,src,__tests__}/**/*.{js,mjs,jsx,md,yml}' '*.{js,mjs,jsx,md,yml}'",
-    "lint:md": "remark . -i .gitignore -f -q",
+    "lint:md": "remark '*.md' -i .gitignore -f -q",
     "lint:js": "eslint . --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' --report-unused-disable-directives --ignore-pattern '!.*' --ignore-path .gitignore --ext '.js,.mjs,.jsx'",
     "lint": "npm-run-all -l -p 'lint:**'",
     "prettier": "npm run lint:prettier -- --write",

@@ -1,5 +1,6 @@
 "use strict";
 
+const path = require("path");
 const fs = require("fs");
 const os = require("os");
 const binBuild = require("bin-build");
@@ -15,9 +16,14 @@ const buildCommands = () => {
     cfgExtras = "libpng_LIBS='/usr/local/lib/libpng16.a -lz' --enable-static";
   }
 
+  const dest = binWrappers.cjpeg.dest();
+  const compilationDest = path.isAbsolute(dest)
+    ? dest
+    : path.join(process.cwd(), dest);
+
   const cfg = [
     `./configure --enable-static --disable-shared --disable-dependency-tracking --with-jpeg8 ${cfgExtras}`,
-    `--prefix="${binWrappers.cjpeg.dest()}" --bindir="${binWrappers.cjpeg.dest()}" --libdir="${binWrappers.cjpeg.dest()}"`
+    `--prefix="${compilationDest}" --bindir="${compilationDest}" --libdir="${compilationDest}"`
   ].join(" ");
 
   return binBuild.url(
@@ -33,6 +39,14 @@ Object.keys(binWrappers).forEach(program => {
 
   queue.add(() =>
     Promise.resolve()
+      .then(() => {
+        if (process.env.COMPILATION_REQUIRED) {
+          throw new Error("Compilation required");
+        }
+
+        // eslint-disable-next-line promise/no-return-wrap
+        return Promise.resolve();
+      })
       // Workaround https://github.com/kevva/bin-wrapper/issues/67
       // Need use bin.run(['--version']) after resolve
       .then(() => binWrapper.findExisting())
@@ -46,9 +60,6 @@ Object.keys(binWrappers).forEach(program => {
         ].includes(program);
         const checkCommand = commandWihtoutCheck ? ["-help"] : ["-version"];
 
-        // eslint-disable-next-line no-console
-        console.log(binWrapper.path());
-
         return binWrapper
           .runCheck(checkCommand)
           .then(binCheck => {
@@ -59,10 +70,7 @@ Object.keys(binWrappers).forEach(program => {
           .catch(error => {
             const { message } = error;
 
-            // eslint-disable-next-line no-console
-            console.log(error);
-
-            if (commandWihtoutCheck && /usage/iu.test(message)) {
+            if (commandWihtoutCheck && /usage/i.test(message)) {
               console.log(`${program} pre-build test passed successfully`); // eslint-disable-line no-console
 
               return;
@@ -74,8 +82,11 @@ Object.keys(binWrappers).forEach(program => {
       .catch(error => {
         queue.pause();
 
-        console.log(error.message); // eslint-disable-line no-console
-        console.log("pre-build test failed"); // eslint-disable-line no-console
+        if (!process.env.COMPILATION_REQUIRED) {
+          console.log(error.message); // eslint-disable-line no-console
+          console.log("pre-build test failed"); // eslint-disable-line no-console
+        }
+
         console.log("compiling from source"); // eslint-disable-line no-console
 
         buildCommands()
