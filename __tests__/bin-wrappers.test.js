@@ -1,7 +1,7 @@
 "use strict";
 
-const binWrappers = require("../src/bin-wrappers");
 const binCheck = require("bin-check");
+const binWrappers = require("../src/bin-wrappers");
 
 describe("bin wrapper instances", () => {
   it("should work", () =>

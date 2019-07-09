@@ -7,9 +7,7 @@ const pkg = require("../package.json");
 const dest = path.join(__dirname, "../vendor");
 const isWin = process.platform === "win32";
 
-const url = `https://raw.githubusercontent.com/itgalaxy/mozjpeg-binaries/v${
-  pkg.version
-}/vendor/`;
+const url = `https://raw.githubusercontent.com/itgalaxy/mozjpeg-binaries/v${pkg.version}/vendor/`;
 
 module.exports = {
   cjpeg: new BinWrappers()
@@ -18,16 +16,27 @@ module.exports = {
     .src(`${url}linux/libjpeg.la`, "linux")
     .src(`${url}linux/libturbojpeg.a`, "linux")
     .src(`${url}linux/libturbojpeg.la`, "linux")
+    .src(`${url}linux/cjpeg`, "darwin")
+    .src(`${url}linux/libjpeg.a`, "darwin")
+    .src(`${url}linux/libjpeg.la`, "darwin")
+    .src(`${url}linux/libturbojpeg.a`, "darwin")
+    .src(`${url}linux/libturbojpeg.la`, "darwin")
+    .src(`${url}windows/cjpeg.exe`, "win32")
+
     .dest(dest)
     .use(isWin ? "cjpeg.exe" : "cjpeg"),
 
   djpeg: new BinWrappers()
     .src(`${url}linux/djpeg`, "linux")
+    .src(`${url}macos/djpeg`, "darwin")
+    .src(`${url}windows/djpeg.exe`, "win32")
     .dest(dest)
     .use(isWin ? "djpeg.exe" : "djpeg"),
 
   jpegtran: new BinWrappers()
     .src(`${url}linux/jpegtran`, "linux")
+    .src(`${url}macos/jpegtran`, "darwin")
+    .src(`${url}windows/jpegtran.exe`, "win32")
     .dest(dest)
     .use(isWin ? "jpegtran.exe" : "jpegtran"),
 

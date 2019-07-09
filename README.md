@@ -13,7 +13,7 @@ You probably want [`imagemin-mozjpeg-full`](https://github.com/itgalaxy/imagemin
 
 What is difference between [mozjpeg-bin](https://github.com/imagemin/mozjpeg-bin/):
 
-- Contains all binaries delivered by `mozjpeg`: `cjpeg`, `djpeg`, `jpegtran`, `rdjpgcom`, `tjbench` and `wrjpgcom`.
+- Contains all binaries delivered by `mozjpeg`: `cjpeg`, `djpeg`, `jpegtran`, `rdjpgcom`, `tjbench` and `wrjpgcom` (`rdjpgcom`, `tjbench`, `wrjpgcom` is unavailable on `windows`).
 - No security vulnerabilities.
 - Latest version.
 

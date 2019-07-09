@@ -3,8 +3,8 @@
 const path = require("path");
 const tempy = require("tempy");
 const execa = require("execa");
-const binaries = require("../src");
 const compareSize = require("compare-size");
+const binaries = require("../src");
 
 // eslint-disable-next-line unicorn/prefer-exponentiation-operator
 const infinityTimeout = Math.pow(2, 31) - 1;
@@ -15,7 +15,7 @@ describe("command", () => {
     () =>
       execa("node", [path.join(__dirname, "../src/install.js")]).then(
         result => {
-          expect(result.code).toBe(0);
+          expect(result.exitCode).toBe(0);
 
           return result;
         }
@@ -31,7 +31,7 @@ describe("command", () => {
 
     return execa(binaries.cjpeg, args)
       .then(result => {
-        expect(result.code).toBe(0);
+        expect(result.exitCode).toBe(0);
 
         return result;
       })

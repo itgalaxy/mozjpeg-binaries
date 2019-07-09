@@ -146,15 +146,11 @@ stats-*.json
 
 # Composer
 composer.phar
-vendor
+vendor/*
 !vendor/linux
+!vendor/linux/**
 !vendor/macos
-!vendor/win
+!vendor/macos/**
+!vendor/windows
+!vendor/windows/**
 !composer.lock
-
-# Applcation
-build
-src/shared/fonts/icon-font.*
-src/shared/styles/fonts/_icon-font.scss
-!tests/fixtures/package-manifest/vendor
-
