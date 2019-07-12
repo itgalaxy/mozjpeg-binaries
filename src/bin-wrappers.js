@@ -5,8 +5,8 @@ const BinWrappers = require("bin-wrapper");
 const pkg = require("../package.json");
 
 const dest =
-  typeof process.env.COMPILATION_DEST !== "undefined"
-    ? process.env.COMPILATION_DEST
+  typeof process.env.MOZJPEG_COMPILATION_DEST !== "undefined"
+    ? process.env.MOZJPEG_COMPILATION_DEST
     : path.join(__dirname, "../vendor");
 const isWin = process.platform === "win32";
 

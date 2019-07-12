@@ -74,8 +74,8 @@ matrix:
         - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
         - bash upload.sh mozjpeg-linux.tar.gz
       env:
-        - COMPILATION_DEST=binaries/linux
-        - COMPILATION_REQUIRED=true
+        - MOZJPEG_COMPILATION_DEST=binaries/linux
+        - MOZJPEG_COMPILATION_REQUIRED=true
     - stage: deploy
       os: osx
       node_js: "8"
@@ -86,8 +86,8 @@ matrix:
         - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
         - bash upload.sh mozjpeg-osx.tar.gz
       env:
-        - COMPILATION_DEST=binaries/macos
-        - COMPILATION_REQUIRED=true
+        - MOZJPEG_COMPILATION_DEST=binaries/macos
+        - MOZJPEG_COMPILATION_REQUIRED=true
     # TODO implement in next release
     # - stage: deploy
     #  os: windows
@@ -100,8 +100,8 @@ matrix:
     #    - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
     #    - bash upload.sh mozjpeg-windows.tar.gz
     #  env:
-    #    - COMPILATION_DEST=binaries/windows
-    #    - COMPILATION_REQUIRED=true
+    #    - MOZJPEG_COMPILATION_DEST=binaries/windows
+    #    - MOZJPEG_COMPILATION_REQUIRED=true
 
 before_install:
   - if [[ $TRAVIS_OS_NAME == "osx" ]]; then brew update && brew install nasm; fi;
