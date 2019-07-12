@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
-## Unreleased
+## 2.1.0 - 2019-07-12
 
 - feat: Added `MOZJPEG_COMPILATION_REQUIRED` env variable to run compilation without prebuild test.
 - feat: Added `IGNORE_MOZJPEG_COMPATION_ERROR` env variable to ignore error on install phase.
