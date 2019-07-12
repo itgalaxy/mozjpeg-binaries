@@ -36,10 +36,14 @@ const queue = new PQueue({ concurrency: 1 });
 
 Object.keys(binWrappers).forEach(program => {
   const binWrapper = binWrappers[program];
+  const compilationRequired =
+    typeof process.env.MOZJPEG_COMPILATION_REQUIRED !== "undefined"
+      ? process.env.MOZJPEG_COMPILATION_REQUIRED === "true"
+      : false;
 
   queue.add(async () => {
     try {
-      if (process.env.COMPILATION_REQUIRED) {
+      if (compilationRequired) {
         throw new Error("Compilation required");
       }
 
@@ -75,7 +79,7 @@ Object.keys(binWrappers).forEach(program => {
     } catch (error) {
       queue.pause();
 
-      if (!process.env.COMPILATION_REQUIRED) {
+      if (!compilationRequired) {
         console.log(error.message); // eslint-disable-line no-console
         console.log("pre-build test failed"); // eslint-disable-line no-console
       }
@@ -93,7 +97,14 @@ Object.keys(binWrappers).forEach(program => {
         const exitCode =
           typeof buildError.code === "number" ? buildError.code : 1;
 
-        process.exit(exitCode);
+        const ignoreMozjpegCompilationError =
+          typeof process.env.IGNORE_MOZJPEG_COMPATION_ERROR !== "undefined"
+            ? process.env.IGNORE_MOZJPEG_COMPATION_ERROR === "true"
+            : false;
+
+        if (!ignoreMozjpegCompilationError) {
+          process.exit(exitCode);
+        }
       }
 
       console.log("mozjpeg binaries built successfully"); // eslint-disable-line no-console
