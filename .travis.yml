@@ -70,7 +70,7 @@ matrix:
       script:
         - node -p "process.arch"
         - node src/install.js
-        - tar -czvf mozjpeg-linux.tar.gz $COMPILATION_DEST
+        - tar -czvf mozjpeg-linux.tar.gz $MOZJPEG_COMPILATION_DEST
         - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
         - bash upload.sh mozjpeg-linux.tar.gz
       env:
@@ -82,7 +82,7 @@ matrix:
       script:
         - node -p "process.arch"
         - node src/install.js
-        - tar -czvf mozjpeg-osx.tar.gz $COMPILATION_DEST
+        - tar -czvf mozjpeg-osx.tar.gz $MOZJPEG_COMPILATION_DEST
         - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
         - bash upload.sh mozjpeg-osx.tar.gz
       env:
